@@ -14,17 +14,17 @@ namespace WindowsFormsApp13
         {
             using (FileStream fs = new FileStream("user.json", FileMode.OpenOrCreate))
             {
-                string str = null;
+                string str = question;
                 while (true)
                 {
                     str = fs.ToString();
                     if (str != null)
                     {
                         if (str == question)
-                            return " есть такая заметка";
+                            return " Есть такая заметка";
                     }
                     else
-                        return " нет такой заметки";
+                        return " Нет такой заметки";
                 }
             }
         }

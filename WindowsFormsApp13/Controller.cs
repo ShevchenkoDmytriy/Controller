@@ -15,7 +15,9 @@ namespace WindowsFormsApp13
         {
             using (FileStream fs = new FileStream("user.json", FileMode.OpenOrCreate))
             {
-                await JsonSerializer.SerializeAsync(fs,msg);
+                Person tom = new Person(msg);
+                await JsonSerializer.SerializeAsync<Person>(fs, tom);
+                Console.WriteLine("Data has been saved to file");
             }
         }
     }

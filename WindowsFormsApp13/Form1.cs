@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -50,9 +52,24 @@ namespace WindowsFormsApp13
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             MessageBox.Show(DataBase.GetAnsver(textBox1.Text));
         }
-    }
 
+        private async Task button3_ClickAsync(object sender, EventArgs e)
+        {
+            using (FileStream fs = new FileStream("user.json", FileMode.OpenOrCreate))
+            {
+                Person person = await JsonSerializer.DeserializeAsync<Person>(fs);
+                MessageBox.Show($"Name: {person?.Name}");
+            }
+        }
+    }
+    class Person
+    {
+        public string Name { get; }
+        public Person(string name)
+        {
+            Name = name;
+        }
+    }
 }
